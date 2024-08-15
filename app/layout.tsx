@@ -6,7 +6,7 @@ import { ConvexClientProvider } from "./ConvexClientProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Hour Minder",
+  title: "Hour Minder App",
   description: "Votre application de décompte d'heures",
 };
 
