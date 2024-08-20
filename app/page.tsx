@@ -34,7 +34,7 @@ export default function LandingPage() {
         </p>
   
         <Button size="lg" variant="default">
-          <Link href="/signup" className="mr-2">
+          <Link href="/signin" className="mr-2">
           {isAuthenticated ? "Démarrer" : "Se connecter"}
           </Link>
         </Button>
