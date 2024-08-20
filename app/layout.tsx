@@ -4,6 +4,7 @@ import "./globals.css";
 import { ConvexClerkProvider } from "../providers/ConvexClerkProvider";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,6 +27,7 @@ export default function RootLayout({
             <div className="flex-grow">{children}</div>
             <Footer />
           </div>
+          <Toaster richColors/>
         </ConvexClerkProvider>
       </body>
     </html>
