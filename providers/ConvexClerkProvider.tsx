@@ -13,7 +13,7 @@ const convex = new ConvexReactClient(
 const ConvexClerkProvider = ({ children }: { children: ReactNode }) => (
   <ClerkProvider 
   localization={frFR}
-  publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY!}>
+  publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY as string}>
       <ConvexProviderWithClerk client={convex} useAuth={useAuth}>
         {children}
       </ConvexProviderWithClerk>
