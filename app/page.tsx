@@ -6,7 +6,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { useConvexAuth } from "convex/react";
 
-
 export default function LandingPage() {
   const { isAuthenticated } = useConvexAuth();
 

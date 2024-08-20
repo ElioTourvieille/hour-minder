@@ -25,4 +25,12 @@ export default defineSchema({
         tokenIdentifier: v.optional(v.string()),
     }).index("by_tokenIdentifier", ["tokenIdentifier"])
     .index("by_userId", ["userId"]),
+    hours: defineTable({
+        startTime: v.string(),
+        endTime: v.string(),
+        date: v.string(),
+        userId: v.optional(v.id("users")),
+        comments: v.optional(v.string()),
+        duration: v.optional(v.number()),
+    }).index("by_userId", ["userId"])
 });
