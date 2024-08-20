@@ -25,6 +25,7 @@
     "next-themes": "^0.3.0",
     "react": "^18",
     "react-dom": "^18",
+    "react-dropzone": "^14.2.3",
     "simplex-noise": "^4.0.3",
     "sonner": "^1.5.0",
     "svix": "^1.30.0",

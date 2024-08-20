@@ -8,7 +8,7 @@ import { useConvexAuth } from "convex/react";
 
 
 export default function LandingPage() {
-  const { isLoading, isAuthenticated } = useConvexAuth();
+  const { isAuthenticated } = useConvexAuth();
 
   return (
     <main className="w-full flex flex-col items-center gap-16 px-8 pb-10">

@@ -10,7 +10,7 @@ export default function SideNav() {
 
   return (
     <nav>
-      <ul className="space-y-6">
+      <ul className="space-y-8">
       <li>
           <Link
             className={cn(
