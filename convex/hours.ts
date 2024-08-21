@@ -53,22 +53,17 @@ export const addHours = mutation({
         duration: v.optional(v.float64()),
     },
     handler: async (ctx, args) => {
-        const duration = calculateDuration(args.startTime, args.endTime)
+        const duration = calculateDurationInMinutes(args.startTime, args.endTime)
 
-        function calculateDuration(startTime:string, endTime:string) {
-            const [startHours, startMinutes] = startTime.split(':').map(Number);
-            const [endHours, endMinutes] = endTime.split(':').map(Number);
-          
-            const start = new Date();
-            start.setHours(startHours, startMinutes);
-          
-            const end = new Date();
-            end.setHours(endHours, endMinutes);
-          
-            const diff = (end.getTime() - start.getTime()) / (1000 * 60 * 60); // Différence en heures
-            return diff;
-          }
-
+        function calculateDurationInMinutes(startTime: string, endTime: string): number {
+          const start = new Date(startTime);
+          const end = new Date(endTime);
+        
+          const diffInMilliseconds = end.getTime() - start.getTime();
+          const diffInMinutes = Math.floor(diffInMilliseconds / (1000 * 60)); // Différence en minutes
+          return diffInMinutes;
+        }
+        
         await ctx.db.insert("hours", {
             startTime: args.startTime,
             endTime: args.endTime,
