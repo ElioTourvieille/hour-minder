@@ -111,6 +111,11 @@ const config = {
         fifth: "moveInCircle 20s ease infinite",
       },
     },
+    screens: {
+      'mobile': { max: '769px' },
+      'tablet': { max: '1024px' },
+      'laptop': { max: '1280px' },
+    },
   },
   plugins: [require("tailwindcss-animate")],
 } satisfies Config

@@ -24,7 +24,7 @@ export default function RootLayout({
         <ConvexClerkProvider>
           <div className="flex flex-col min-h-screen">
             <Navbar />
-            <div className="flex-grow">{children}</div>
+            <div className="flex-1 flex overflow-hidden">{children}</div>
             <Footer />
           </div>
           <Toaster richColors/>

@@ -11,10 +11,12 @@ const Navbar = () => {
   const { isAuthenticated } = useConvexAuth();
 
   return (
-    <nav className="w-full flex justify-between items-center mb-8 px-16 py-8">
+    <nav className="w-full flex bg-white justify-between items-center mb-8 px-16 py-6 shadow-sm
+     mobile:px-4 dark:bg-slate-900 dark:shadow-none">
       <Link href="/" className="flex-center gap-2">
-        <Image src={Logo} alt="Logo Hour Minder" width={50} height={50} />
-        <h1 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-slate-800 to-slate-500">
+        <Image src={Logo} alt="Logo Hour Minder" width={55} height={55} />
+        <h1 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-slate-800 to-slate-500
+         mobile:hidden dark:from-slate-200 dark:to-slate-600">
           HourMinder
         </h1>
       </Link>
@@ -24,7 +26,7 @@ const Navbar = () => {
           <UserButton
             appearance={{
               elements: {
-                userButtonAvatarBox: "size-12",
+                userButtonAvatarBox: "size-12 mobile:size-10",
               },
             }}
           />

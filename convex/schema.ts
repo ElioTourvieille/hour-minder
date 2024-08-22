@@ -29,6 +29,8 @@ export default defineSchema({
         startTime: v.string(),
         endTime: v.string(),
         date: v.string(),
+        month: v.number(),
+        year: v.number(),
         userId: v.optional(v.id("users")),
         comments: v.optional(v.string()),
         duration: v.optional(v.number()),

@@ -6,7 +6,7 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex gap-24 container mx-20 pt-12">
+    <div className="flex container max-w-[1800px] mx-10 py-12 tablet:mx-4 tablet:py-4">
         <SideNav />
       {children}
     </div>

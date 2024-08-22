@@ -1,76 +1,154 @@
 "use client"
 
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import DatePicker from 'react-datepicker';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import dayjs from 'dayjs';
 import 'react-datepicker/dist/react-datepicker.css';
+import { FormData } from "@/lib/types";
+import dayjs from 'dayjs';
+import { toast } from 'sonner';
+import { useEffect, useState } from 'react';
+import { Checkbox } from '@/components/ui/checkbox';
 
-// Définir les types pour les données du formulaire
-interface FormData {
-  date: Date;
-  startTime: dayjs.Dayjs | null;
-  endTime: dayjs.Dayjs | null;
-  comments?: string;
-}
+function AddHoursForm({ onSubmit }: { onSubmit: (formData: FormData) => Promise<void> }) {
+  const loadSavedStartTime = () => {
+    const savedStartTime = localStorage.getItem("startTime");
+    return savedStartTime ? dayjs(savedStartTime) : dayjs();
+  };
 
-function AddHoursForm({ onSubmit }: { onSubmit: (formData: FormData) => void }) {
-  const { register, handleSubmit, setValue, getValues } = useForm<FormData>({
+  // Charger l'état du verrouillage depuis localStorage
+  const loadLockStartTime = () => {
+    const savedLockStartTime = localStorage.getItem("lockStartTime");
+    return savedLockStartTime ? JSON.parse(savedLockStartTime) : false;
+  };
+
+  const [lockStartTime, setLockStartTime] = useState<boolean>(loadLockStartTime());
+  const savedStartTime = loadSavedStartTime();
+
+  const { control, register, handleSubmit, setValue, setError, getValues } = useForm<FormData>({
     defaultValues: {
       date: new Date(),
-      startTime: null,
-      endTime: null,
+      startTime: dayjs(localStorage.getItem("startTime") || dayjs()),
+      endTime: undefined,
     },
   });
 
-  // Fonction pour gérer la soumission du formulaire
+   // Sauvegarder l'état du verrouillage et startTime dans localStorage
+   useEffect(() => {
+    localStorage.setItem("lockStartTime", JSON.stringify(lockStartTime));
+    if (lockStartTime) {
+      localStorage.setItem("startTime", getValues('startTime')?.toISOString() );
+    }
+  }, [lockStartTime, getValues('startTime')]);
+
+  const handleChecked = (checked: boolean) => {
+    setLockStartTime(checked);
+    if (checked) {
+      const currentStartTime = getValues('startTime')?.toISOString() || dayjs().toISOString();
+      localStorage.setItem("startTime", currentStartTime);
+    } else {
+      localStorage.removeItem("startTime");
+    }
+  };
+
   const onFormSubmit = (data: FormData) => {
-    // Formater la date en chaîne de caractères
+    const startTime = data.startTime ;
+    const endTime = data.endTime ; 
+
+    if (!startTime) {
+      setError('startTime', { type: 'manual', message: 'Veuillez remplir le champ heure de début' });
+      toast.error('Veuillez remplir le champ heure de début');
+      return;
+    }
+
+    if (!endTime) {
+      setError('endTime', { type: 'manual', message: 'Veuillez remplir le champ heure de fin' });
+      toast.error('Veuillez remplir le champ heure de fin');
+      return;
+    }
+
+    const date = new Date();
+    const month = date.getMonth()
+    const year = date.getFullYear()
+    
     const formData = {
       ...data,
+      startTime, 
+      endTime, 
+      month,
+      year,
     };
-    onSubmit(formData); // Appel de la fonction onSubmit pour gérer l'ajout des heures
+    onSubmit(formData);
   };
 
   return (
-    <form onSubmit={handleSubmit(onFormSubmit)} className="space-y-6 bg-white p-6 rounded-lg shadow-md max-w-lg mx-auto">
+    <form onSubmit={handleSubmit(onFormSubmit)} className="space-y-6 bg-white p-6 rounded-lg shadow-lg max-w-lg dark:bg-gray-900 tablet:mx-auto">
       <div className="flex flex-col">
-        <label className="mb-2 text-gray-700">Date :</label>
+        <label className="mb-2 text-gray-700 dark:text-white">Date :</label>
+        <Controller
+          name="date"
+          control={control}
+          render={({ field: { value, onChange } }) => (
         <DatePicker
           selected={getValues('date')}
           onChange={(date: Date | null) => date && setValue('date', date)}
           dateFormat="yyyy-MM-dd"
-          className="border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-        />
-      </div>
+          className="border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700"
+          />
+        )}
+      />
+    </div>
 
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <div className="flex flex-col">
-          <label className="mb-2 text-gray-700">Heure de début :</label>
-          <TimePicker
-            label="Sélectionner l'heure de début"
-            value={getValues('startTime')}
-            onChange={(newValue) => setValue('startTime', newValue)}
+          <label className="mb-2 text-gray-700 dark:text-white">Heure de début :</label>
+          <Controller
+            name="startTime"
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <TimePicker
+                label="Sélectionner l'heure de début"
+                value={value}
+                onChange={(newValue) => setValue("startTime", newValue || savedStartTime)}
+                ampm={false}
+                className="dark:bg-gray-100 rounded-md"
+                disabled={lockStartTime}
+              />
+            )}
           />
         </div>
 
+        <div className="flex items-center mt-4">
+        <Checkbox
+          id="lockStartTime"
+          checked={lockStartTime}
+          onCheckedChange={handleChecked}
+          className="mr-2"
+        />
+        <label htmlFor="lockStartTime" className="text-gray-700 dark:text-white">
+          Valider l'heure de début
+        </label>
+      </div>
+
         <div className="flex flex-col">
-          <label className="mb-2 text-gray-700">Heure de fin :</label>
+          <label className="mb-2 text-gray-700 dark:text-white">Heure de fin :</label>
           <TimePicker
             label="Sélectionner l'heure de fin"
             value={getValues('endTime')}
-            onChange={(newValue) => setValue('endTime', newValue)}
+            onChange={(newValue) => setValue('endTime', newValue || dayjs())}
+            ampm={false}
+            className="dark:bg-gray-100 rounded-md"
           />
         </div>
       </LocalizationProvider>
 
       <div className="flex flex-col">
-        <label className="mb-2 text-gray-700">Commentaires :</label>
+        <label className="mb-2 text-gray-700 dark:text-white">Commentaires :</label>
         <textarea
           {...register('comments')}
-          className="border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none"
+          className="border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none dark:bg-gray-700"
           rows={4}
         />
       </div>

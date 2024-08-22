@@ -1,3 +1,4 @@
+// SideNavMobile.tsx
 "use client";
 
 import { cn } from "@/lib/utils";
@@ -5,21 +6,21 @@ import { CalendarClock, ClipboardPen, FilesIcon, Search } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export default function SideNav() {
+export default function SideNavMobile() {
   const pathname = usePathname();
 
   return (
-    <nav className="mx-20 max-w-1/3 laptop:mx-10 tablet:hidden">
-      <ul className="space-y-8">
-      <li>
+    <nav className="hidden flex-row justify-around p-4 space-x-4 tablet:flex">
+      <ul className="flex flex-row space-x-4">
+        <li>
           <Link
             className={cn(
-              "font-medium flex gap-2 items-center text-xl hover:text-blue-400 dark:hover:text-blue-200",
+              "font-medium flex gap-2 items-center text-lg hover:text-blue-400 dark:hover:text-blue-200",
               {
                 "text-blue-700": pathname.endsWith("/search"),
               }
             )}
-            href="/dashboard/hours"
+            href="/dashboard/search"
           >
             <Search />
             Recherche
@@ -29,7 +30,7 @@ export default function SideNav() {
         <li>
           <Link
             className={cn(
-              "font-medium flex gap-2 items-center text-xl hover:text-blue-400 dark:hover:text-blue-200",
+              "font-medium flex gap-2 items-center text-lg hover:text-blue-400 dark:hover:text-blue-200",
               {
                 "text-blue-700": pathname.endsWith("/hours"),
               }
@@ -44,7 +45,7 @@ export default function SideNav() {
         <li>
           <Link
             className={cn(
-              "font-medium flex gap-2 items-center text-xl hover:text-blue-400 dark:hover:text-blue-200",
+              "font-medium flex gap-2 items-center text-lg hover:text-blue-400 dark:hover:text-blue-200",
               {
                 "text-blue-700": pathname.endsWith("/documents"),
               }
@@ -59,7 +60,7 @@ export default function SideNav() {
         <li>
           <Link
             className={cn(
-              "font-medium flex gap-2 items-center text-xl hover:text-blue-400 dark:hover:text-blue-200",
+              "font-medium flex gap-2 items-center text-lg hover:text-blue-400 dark:hover:text-blue-200",
               {
                 "text-blue-700": pathname.endsWith("/notes"),
               }
