@@ -11,7 +11,7 @@ const Navbar = () => {
   const { isAuthenticated } = useConvexAuth();
 
   return (
-    <nav className="w-full flex bg-white justify-between items-center mb-8 px-16 py-6 shadow-sm
+    <nav className="w-full flex bg-white justify-between items-center mb-8 px-24 py-6 shadow-sm
      mobile:px-4 dark:bg-slate-900 dark:shadow-none">
       <Link href="/" className="flex-center gap-2">
         <Image src={Logo} alt="Logo Hour Minder" width={55} height={55} />

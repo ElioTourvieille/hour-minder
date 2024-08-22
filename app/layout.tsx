@@ -9,6 +9,9 @@ import { Toaster } from "sonner";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  icons: {
+    icon: "/favicon.ico",
+  },
   title: "Hour Minder App",
   description: "Votre application de décompte d'heures",
 };

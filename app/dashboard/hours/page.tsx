@@ -18,7 +18,6 @@ import { HoursResume } from "@/components/hoursResume";
 import { ConvexError } from "convex/values";
 import SideNavMobile from "@/components/mobile-nav";
 
-
 export default function DashboardHoursPage() {
   const { user } = useClerk();
   const clerkId = user?.id;

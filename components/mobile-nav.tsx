@@ -10,8 +10,8 @@ export default function SideNavMobile() {
   const pathname = usePathname();
 
   return (
-    <nav className="hidden flex-row justify-around p-4 space-x-4 tablet:flex">
-      <ul className="flex flex-row space-x-4">
+    <nav className="hidden flex-row justify-around p-4 tablet:flex tablet:p-0 mobile:justify-center">
+      <ul className="flex flex-row gap-4 mobile:flex-wrap">
         <li>
           <Link
             className={cn(

@@ -112,7 +112,7 @@ const config = {
       },
     },
     screens: {
-      'mobile': { max: '769px' },
+      'mobile': { max: '720px' },
       'tablet': { max: '1024px' },
       'laptop': { max: '1280px' },
     },

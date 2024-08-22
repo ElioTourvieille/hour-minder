@@ -27,7 +27,7 @@ function AddHoursForm({ onSubmit }: { onSubmit: (formData: FormData) => Promise<
   const [lockStartTime, setLockStartTime] = useState<boolean>(loadLockStartTime());
   const savedStartTime = loadSavedStartTime();
 
-  const { control, register, handleSubmit, setValue, setError, getValues } = useForm<FormData>({
+  const { control, register, handleSubmit, setValue, setError, getValues, reset } = useForm<FormData>({
     defaultValues: {
       date: new Date(),
       startTime: dayjs(localStorage.getItem("startTime") || dayjs()),
@@ -81,10 +81,11 @@ function AddHoursForm({ onSubmit }: { onSubmit: (formData: FormData) => Promise<
       year,
     };
     onSubmit(formData);
+    handleChecked(false);
   };
 
   return (
-    <form onSubmit={handleSubmit(onFormSubmit)} className="space-y-6 bg-white p-6 rounded-lg shadow-lg max-w-lg dark:bg-gray-900 tablet:mx-auto">
+    <form onSubmit={handleSubmit(onFormSubmit)} className="space-y-6 bg-white p-6 rounded-lg shadow-lg max-w-lg dark:bg-gray-900 tablet:mx-auto mobile:m-0">
       <div className="flex flex-col">
         <label className="mb-2 text-gray-700 dark:text-white">Date :</label>
         <Controller
@@ -95,7 +96,7 @@ function AddHoursForm({ onSubmit }: { onSubmit: (formData: FormData) => Promise<
           selected={getValues('date')}
           onChange={(date: Date | null) => date && setValue('date', date)}
           dateFormat="yyyy-MM-dd"
-          className="border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700"
+          className="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700"
           />
         )}
       />
