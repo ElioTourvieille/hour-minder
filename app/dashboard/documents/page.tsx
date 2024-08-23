@@ -9,26 +9,27 @@ import { Card } from "@/components/ui/card";
 import Image from "next/image";
 import { useCurrentUser } from "@/hooks/useCurrentUser";
 import { BackgroundShapeBottom, BackgroundShapeTop } from "@/components/backgroundShape";
+import ImgDocument from "@/public/assets/img/document.webp";
 
 export default function Home() {
   const { currentUser } = useCurrentUser();
 
-  const documents = useQuery(api.documents.getDocument, {
+  const documents = useQuery(api.documents.getDocuments, {
     userId: currentUser?._id,
   });
 
   return (
-    <main className="w-full space-y-8">
+    <main className="w-full space-y-8 mobile:text-center">
       <BackgroundShapeTop />
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center mobile:flex-col mobile:gap-6">
         <h1 className="text-4xl font-bold">Mes documents</h1>
-        <CreateDocumentButton />
+        {documents && documents.length > 0 && <CreateDocumentButton />}
       </div>
 
       {!documents && (
         <div className="grid grid-cols-3 gap-8">
           {new Array(8).fill("").map((_, i) => (
-            <Card className="h-[200px] p-6 flex flex-col justify-between">
+            <Card key={i} className="h-[200px] p-6 flex flex-col justify-between">
               <Skeleton className="h-[20px] rounded" />
               <Skeleton className="h-[20px] rounded" />
               <Skeleton className="h-[20px] rounded" />
@@ -41,7 +42,7 @@ export default function Home() {
       {documents && documents.length === 0 && (
         <div className="py-12 flex flex-col justify-center items-center gap-8">
           <Image
-            src="/assets/images/documents.svg"
+            src={ImgDocument}
             width="200"
             height="200"
             alt="a picture of a girl holding documents"
@@ -52,7 +53,7 @@ export default function Home() {
       )}
 
       {documents && documents.length > 0 && (
-        <div className="grid grid-cols-3 gap-8">
+        <div className="grid grid-cols-3 gap-8 mobile:grid-cols-2 mobile:gap-6 small:grid-cols-1">
           {documents?.map((doc) => <DocumentCard key={doc._id} document={doc} />)}
         </div>
       )}

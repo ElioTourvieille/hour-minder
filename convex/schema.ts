@@ -1,5 +1,6 @@
 import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
+import { title } from "process";
 
 export default defineSchema({
     users: defineTable({
@@ -9,22 +10,20 @@ export default defineSchema({
         email: v.string(),
     }).index("by_email", ["email"])
     .index("by_clerkId", ["clerkId"]),
+
     documents: defineTable({
         title: v.string(),
         description: v.optional(v.string()),
-        userId: v.optional(v.id("users")),
         tokenIdentifier: v.optional(v.string()),
-        embedding: v.optional(v.array(v.float64())),
         fileId: v.id("_storage"),
-    }).index("by_tokenIdentifier", ["tokenIdentifier"])
-    .index("by_userId", ["userId"]),
+    }).index("by_tokenIdentifier", ["tokenIdentifier"]),
+   
     notes: defineTable({
         text: v.string(),
-        userId: v.optional(v.id("users")),
-        embedding: v.optional(v.array(v.float64())),
+        title: v.string(),
         tokenIdentifier: v.optional(v.string()),
-    }).index("by_tokenIdentifier", ["tokenIdentifier"])
-    .index("by_userId", ["userId"]),
+    }).index("by_tokenIdentifier", ["tokenIdentifier"]),
+    
     hours: defineTable({
         startTime: v.string(),
         endTime: v.string(),

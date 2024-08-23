@@ -37,7 +37,7 @@ export const generateUploadUrl = mutation(async (ctx) => {
     return await ctx.storage.generateUploadUrl();
 });
 
-export const getDocument = query({
+export const getDocuments = query({
     args: { userId: v.optional(v.id("users")) },
     handler: async (ctx, args) => {
         const user = (await ctx.auth.getUserIdentity())?.tokenIdentifier;
@@ -53,11 +53,28 @@ export const getDocument = query({
     }
 });
 
+export const getDocument = query({
+    args: {
+      documentId: v.id("documents"),
+    },
+    async handler(ctx, args) {
+      const accessObj = await hasAccessToDocument(ctx, args.documentId);
+  
+      if (!accessObj) {
+        return null;
+      }
+  
+      return {
+        ...accessObj.document,
+        documentUrl: await ctx.storage.getUrl(accessObj.document.fileId),
+      };
+    },
+  });
+
 export const createDocument = mutation({
     args: {
         title: v.string(),
         description: v.optional(v.string()),
-        userId: v.optional(v.id("users")),
         fileId: v.id("_storage"),
     },
     handler: async (ctx, args) => {
@@ -71,7 +88,7 @@ export const createDocument = mutation({
 
         documentId = await ctx.db.insert("documents", {
             title: args.title,
-            description: "",
+            description: args.description,
             tokenIdentifier: user,
             fileId: args.fileId,
         });

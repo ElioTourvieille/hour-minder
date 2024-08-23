@@ -17,7 +17,6 @@ import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { LoadingButton } from "@/components/loading-button";
 import { Id } from "@/convex/_generated/dataModel";
-import { useCurrentUser } from "@/hooks/useCurrentUser";
 import { Textarea } from "@/components/ui/textarea";
 
 const formSchema = z.object({
@@ -31,7 +30,6 @@ export default function UploadDocumentForm({
 }: {
   onUpload: () => void;
 }) {
-  const { currentUser } = useCurrentUser();
   const createDocument = useMutation(api.documents.createDocument);
   const generateUploadUrl = useMutation(api.documents.generateUploadUrl);
 
@@ -39,7 +37,7 @@ export default function UploadDocumentForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: "",
-      description: undefined
+      description: undefined,
     },
   });
 
@@ -56,7 +54,6 @@ export default function UploadDocumentForm({
     await createDocument({
       title: values.title,
       fileId: storageId as Id<"_storage">,
-      userId: currentUser?._id,
       description: values.description,
     });
     onUpload();

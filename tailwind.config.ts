@@ -112,6 +112,7 @@ const config = {
       },
     },
     screens: {
+      'small': { max: '480px' },
       'mobile': { max: '720px' },
       'tablet': { max: '1024px' },
       'laptop': { max: '1280px' },

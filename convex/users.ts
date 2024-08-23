@@ -1,4 +1,4 @@
-import { internalMutation, query, QueryCtx } from "./_generated/server";
+import { internalMutation, query } from "./_generated/server";
 import { v } from "convex/values";
 
 export const getUserByClerkId = query({
