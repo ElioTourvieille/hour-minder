@@ -3,7 +3,7 @@
 import { api } from "@/convex/_generated/api";
 import { useMutation, useQuery } from "convex/react";
 import { toast } from "sonner";
-import AddHoursForm from "./add-hours-forms";
+import AddHoursForm from "../../../components/add-hours-forms";
 import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import { FormData } from "@/lib/types";

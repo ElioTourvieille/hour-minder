@@ -4,7 +4,7 @@ import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { useParams } from "next/navigation";
 import { Id } from "@/convex/_generated/dataModel";
-import { DeleteNoteButton } from "./delete-note-button";
+import { DeleteNoteButton } from "../../../../components/delete-note-button";
 
 export default function NotePage() {
   const { noteId } = useParams<{ noteId: Id<"notes"> }>();

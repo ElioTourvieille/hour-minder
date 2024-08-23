@@ -5,7 +5,7 @@ import { Id } from "@/convex/_generated/dataModel";
 import { useQuery } from "convex/react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Skeleton } from "@/components/ui/skeleton";
-import { DeleteDocumentButton } from "./delete-document-button";
+import { DeleteDocumentButton } from "../../../../components/delete-document-button";
 
 export default function DocumentPage({
   params,

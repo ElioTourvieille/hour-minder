@@ -2,14 +2,14 @@
 
 import { api } from "@/convex/_generated/api";
 import { useQuery } from "convex/react";
-import { DocumentCard } from "./document-card";
-import CreateDocumentButton from "./upload-document-button";
+import { DocumentCard } from "../../../components/document-card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Card } from "@/components/ui/card";
 import Image from "next/image";
 import { useCurrentUser } from "@/hooks/useCurrentUser";
 import { BackgroundShapeBottom, BackgroundShapeTop } from "@/components/backgroundShape";
 import ImgDocument from "@/public/assets/img/document.webp";
+import UploadDocumentButton from "@/components/upload-document-button";
 
 export default function Home() {
   const { currentUser } = useCurrentUser();
@@ -23,7 +23,7 @@ export default function Home() {
       <BackgroundShapeTop />
       <div className="flex justify-between items-center mobile:flex-col mobile:gap-6">
         <h1 className="text-4xl font-bold">Mes documents</h1>
-        {documents && documents.length > 0 && <CreateDocumentButton />}
+        {documents && documents.length > 0 && <UploadDocumentButton />}
       </div>
 
       {!documents && (
@@ -48,7 +48,7 @@ export default function Home() {
             alt="a picture of a girl holding documents"
           />
           <h2 className="text-2xl">Vous n&apos;avez pas encore de documents</h2>
-          <CreateDocumentButton />
+          <UploadDocumentButton />
         </div>
       )}
 

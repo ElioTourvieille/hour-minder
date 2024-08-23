@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { SearchForm } from "./search-form";
+import { SearchForm } from "../../../components/search-form";
 import { api } from "@/convex/_generated/api";
 import Link from "next/link";
 import { FileIcon, NotebookPen } from "lucide-react";
