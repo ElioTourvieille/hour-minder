@@ -9,7 +9,7 @@ export default function SideNav() {
   const pathname = usePathname();
 
   return (
-    <nav className="mx-20 max-w-1/3 laptop:mx-10 tablet:hidden">
+    <nav className="mx-20 border-r-2 pr-10 border-slate-300 max-w-1/3 laptop:mx-10 tablet:hidden">
       <ul className="space-y-8">
       <li>
           <Link

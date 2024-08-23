@@ -23,7 +23,7 @@ export default function NotesPage() {
   return (
     <main className="w-full space-y-8">
       <BackgroundShapeTop />
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center mobile:flex-col mobile:gap-4">
         <h1 className="text-4xl font-bold">Notes</h1>
         {notes && notes.length > 0 && <CreateNoteButton />}
       </div>
@@ -67,7 +67,7 @@ export default function NotesPage() {
               <li
                 key={note._id}
                 className={cn(
-                  "text-base hover:text-cyan-300 dark:hover:text-cyan-100",
+                  "p-4 border-2 border-slate-300 text-center rounded-md text-base hover:text-blue-300 dark:hover:text-cyan-100",
                   {
                     "text-cyan-300": note._id === noteId,
                   }

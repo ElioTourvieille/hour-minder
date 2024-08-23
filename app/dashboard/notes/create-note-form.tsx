@@ -89,9 +89,9 @@ export default function CreateNoteForm({
 
         <LoadingButton
           isLoading={form.formState.isSubmitting}
-          loadingText="Creating..."
+          loadingText="En cours de création..."
         >
-          Create
+          Créer
         </LoadingButton>
       </form>
     </Form>
