@@ -10,9 +10,20 @@ import { useCurrentUser } from "@/hooks/useCurrentUser";
 import { BackgroundShapeBottom, BackgroundShapeTop } from "@/components/backgroundShape";
 import ImgDocument from "@/public/assets/img/document.webp";
 import UploadDocumentButton from "@/components/upload-document-button";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const { currentUser } = useCurrentUser();
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) {
+    return null;
+  }
+
 
   const documents = useQuery(api.documents.getDocuments, {
     userId: currentUser?._id,
