@@ -18,6 +18,7 @@ import type * as documents from "../documents.js";
 import type * as hours from "../hours.js";
 import type * as http from "../http.js";
 import type * as notes from "../notes.js";
+import type * as search from "../search.js";
 import type * as users from "../users.js";
 
 /**
@@ -33,6 +34,7 @@ declare const fullApi: ApiFromModules<{
   hours: typeof hours;
   http: typeof http;
   notes: typeof notes;
+  search: typeof search;
   users: typeof users;
 }>;
 export declare const api: FilterApi<

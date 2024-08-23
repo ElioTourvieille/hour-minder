@@ -13,9 +13,7 @@ import Link from "next/link";
 
 export function DocumentCard({ document }: { document: Doc<"documents"> }) {
   return (
-    <Card 
-    className="small:w-full"
-    key={document._id}>
+    <Card key={document._id}>
       <CardHeader>
         <CardTitle>{document.title}</CardTitle>
         <CardDescription></CardDescription>

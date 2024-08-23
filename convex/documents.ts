@@ -1,4 +1,4 @@
-import { Id } from "./_generated/dataModel";
+import { Doc, Id } from "./_generated/dataModel";
 import { internalQuery, mutation, MutationCtx, query, QueryCtx } from "./_generated/server";
 import { v } from "convex/values";
 
@@ -35,6 +35,31 @@ export const hasAccessToDocumentQuery = internalQuery({
 
 export const generateUploadUrl = mutation(async (ctx) => {
     return await ctx.storage.generateUploadUrl();
+});
+
+export const getDocumentsByUserAndSearch = query({
+    args: {
+        user: v.optional(v.string()),
+        search: v.string(),
+    },
+    handler: async (ctx, args) => {
+        const searchTerm = args.search.toLowerCase();
+        const user = (await ctx.auth.getUserIdentity())?.tokenIdentifier;
+
+        if (!user) {
+            return null;
+        }
+
+        const documents: Doc<"documents">[] = await ctx.db
+            .query("documents")
+            .withIndex("by_tokenIdentifier", (q) => q.eq("tokenIdentifier", user))
+            .collect();
+
+        return documents.filter((document) =>
+            (document.title?.toLowerCase().includes(searchTerm) || false) ||
+            (document.description?.toLowerCase().includes(searchTerm) || false)
+        );
+    },
 });
 
 export const getDocuments = query({

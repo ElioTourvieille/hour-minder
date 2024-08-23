@@ -2,6 +2,31 @@ import { ConvexError, v } from "convex/values";
 import { mutation, MutationCtx, query, QueryCtx } from "./_generated/server";
 import { Doc, Id } from "./_generated/dataModel";
 
+export const getNotesByUserAndSearch = query({
+    args: {
+        user: v.optional(v.string()),
+        search: v.string(),
+    },
+    handler: async (ctx, args) => {
+        const searchTerm = args.search.toLowerCase();
+        const user = (await ctx.auth.getUserIdentity())?.tokenIdentifier;
+
+        if (!user) {
+            return null;
+        }
+
+        const notes: Doc<"notes">[] = await ctx.db
+            .query("notes")
+            .withIndex("by_tokenIdentifier", (q) => q.eq("tokenIdentifier", user))
+            .collect();
+
+        return notes.filter((note) =>
+            (note.title?.toLowerCase().includes(searchTerm) || false) ||
+            (note.text?.toLowerCase().includes(searchTerm) || false)
+        );
+    },
+});
+
 export const getNote = query({
     args: {
         noteId: v.id("notes"),
