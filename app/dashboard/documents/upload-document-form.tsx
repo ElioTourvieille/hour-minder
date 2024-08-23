@@ -42,11 +42,12 @@ export default function UploadDocumentForm({
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    if (!values.file) return;
     const url = await generateUploadUrl();
 
     const result = await fetch(url, {
       method: "POST",
-      headers: { "Content-Type": values.file?.type || "" },
+      headers: { "Content-Type": values.file.type},
       body: values.file,
     });
     const { storageId } = await result.json();
