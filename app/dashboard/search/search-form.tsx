@@ -19,7 +19,7 @@ import { LoadingButton } from "@/components/loading-button";
 import { useCurrentUser } from "@/hooks/useCurrentUser";
 
 const formSchema = z.object({
-  search: z.string().min(1).max(250),
+  search: z.string().min(3, { message: "Veuillez saisir au moins 3 caractères" }).max(250),
 });
 
 export function SearchForm({

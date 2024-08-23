@@ -54,7 +54,7 @@ export default function NotesPage() {
               height="200"
               alt="Une fille qui prend une note"
             />
-            <h2 className="text-2xl">Vous n'avez pas encore créé de note</h2>
+            <h2 className="text-2xl">Vous n&apos;avez pas encore créé de note</h2>
             <CreateNoteButton />
           </div>
         </div>

@@ -129,7 +129,7 @@ function AddHoursForm({ onSubmit }: { onSubmit: (formData: FormData) => Promise<
           className="mr-2"
         />
         <label htmlFor="lockStartTime" className="text-gray-700 dark:text-white">
-          Valider l'heure de début
+          Valider l&apos;heure de début
         </label>
       </div>
 

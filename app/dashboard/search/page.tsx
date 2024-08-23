@@ -59,10 +59,11 @@ export default function SearchPage() {
       />
 
       <ul className="flex flex-col gap-4">
-        {results?.map((result) => {
+        {results?.map((result, index) => {
           if (result.type === "notes") {
             return (
               <SearchResult
+                key={index}
                 type="note"
                 url={`/dashboard/notes/${result.record._id}`}
                 text={result.record.text}
@@ -71,6 +72,7 @@ export default function SearchPage() {
           } else {
             return (
               <SearchResult
+                key={index}
                 type="document"
                 url={`/dashboard/documents/${result.record._id}`}
                 text={result.record.title + ": " + result.record.description}

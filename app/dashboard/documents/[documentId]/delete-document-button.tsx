@@ -31,10 +31,12 @@ export function DeleteDocumentButton({
 
   return (
     <AlertDialog open={isOpen} onOpenChange={(open) => setIsOpen(open)}>
-      <AlertDialogTrigger>
+      <AlertDialogTrigger asChild>
+        <div>
         <Button variant="destructive">
           <TrashIcon /> Supprimer
         </Button>
+        </div>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>

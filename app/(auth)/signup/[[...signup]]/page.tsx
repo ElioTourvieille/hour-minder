@@ -2,7 +2,7 @@ import { SignUp } from "@clerk/nextjs";
 
 const SignupPage = () => {
   return (
-    <main className="flex flex-col items-center">
+    <main className="flex flex-col items-center justify-center w-full">
       <SignUp
         path="/signup"
         appearance={{

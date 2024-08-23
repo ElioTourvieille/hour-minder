@@ -28,7 +28,7 @@ export default function DashboardHoursPage() {
 
   useEffect(() => {
     setIsClient(true);
-  }, []);
+  });
 
   const handleAddHours = async (formData: FormData) => {
     try {

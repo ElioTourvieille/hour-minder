@@ -53,7 +53,7 @@ export function SignupForm() {
           type="submit"
           className="w-full"
         >
-          S'inscrire
+          S&apos;inscrire
           <BottomGradient />
         </Button>
 

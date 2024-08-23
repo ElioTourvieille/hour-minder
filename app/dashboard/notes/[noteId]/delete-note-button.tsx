@@ -28,7 +28,8 @@ export function DeleteNoteButton({ noteId }: { noteId: Id<"notes"> }) {
 
   return (
     <AlertDialog open={isOpen} onOpenChange={(open) => setIsOpen(open)}>
-      <AlertDialogTrigger>
+      <AlertDialogTrigger asChild>
+        <div>
         <Button
           className="absolute -top-3 -right-3"
           variant={"destructive"}
@@ -36,6 +37,7 @@ export function DeleteNoteButton({ noteId }: { noteId: Id<"notes"> }) {
         >
           <Trash />
         </Button>
+        </div>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>

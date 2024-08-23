@@ -23,10 +23,9 @@ export default function CreateNoteButton() {
           <PlusIcon /> Créer une note
         </Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent aria-describedby={undefined}>
         <DialogHeader>
           <DialogTitle className="mb-4">Créer une note</DialogTitle>
-
           <CreateNoteForm
             onNoteCreated={() => {
               setIsOpen(false);

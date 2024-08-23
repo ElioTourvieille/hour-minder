@@ -18,7 +18,7 @@ export default function LandingPage() {
           Gérer vos heures en toute simplicité
         </h2>
         <p className="text-center text-lg mt-4 max-w-prose">
-          HourMinder est une application de décompte d'heures simple et efficace
+          HourMinder est une application de décompte d&apos;heures simple et efficace
           pour vous aider à vous organiser et à vous concentrer.
         </p>
   

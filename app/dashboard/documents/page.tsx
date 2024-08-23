@@ -47,7 +47,7 @@ export default function Home() {
             height="200"
             alt="a picture of a girl holding documents"
           />
-          <h2 className="text-2xl">Vous n'avez pas encore de documents</h2>
+          <h2 className="text-2xl">Vous n&apos;avez pas encore de documents</h2>
           <CreateDocumentButton />
         </div>
       )}
