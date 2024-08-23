@@ -95,7 +95,7 @@ export function HoursResume() {
             Pour le mois : {workCompletionMonth}h
           </p>
           <p className="mt-4 max-w-[26rem] text-left text-xl/6 text-neutral-200">
-            Pour l'année : {workCompletionYear}h
+            Pour l&apos;année : {workCompletionYear}h
           </p>
         </div>
         <Image

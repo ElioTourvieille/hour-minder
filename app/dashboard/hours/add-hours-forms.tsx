@@ -37,11 +37,12 @@ function AddHoursForm({ onSubmit }: { onSubmit: (formData: FormData) => Promise<
 
    // Sauvegarder l'état du verrouillage et startTime dans localStorage
    useEffect(() => {
+    const startTime = getValues('startTime')?.toISOString();
     localStorage.setItem("lockStartTime", JSON.stringify(lockStartTime));
-    if (lockStartTime) {
+    if (lockStartTime && startTime) {
       localStorage.setItem("startTime", getValues('startTime')?.toISOString() );
     }
-  }, [lockStartTime, getValues('startTime')]);
+  }, [lockStartTime, getValues]);
 
   const handleChecked = (checked: boolean) => {
     setLockStartTime(checked);
