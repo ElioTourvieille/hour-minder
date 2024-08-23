@@ -21,7 +21,7 @@ import { Textarea } from "@/components/ui/textarea";
 
 const formSchema = z.object({
   title: z.string().min(3, { message: "Il doit contenir au moins 3 caractères" }).max(250),
-  file: z.instanceof(File, { message: "Veuillez sélectionner un fichier" }),
+  file: z.optional(z.instanceof(File, { message: "Veuillez sélectionner un fichier" })), 
   description: z.optional(z.string().min(10).max(250)),
 });
 
@@ -46,7 +46,7 @@ export default function UploadDocumentForm({
 
     const result = await fetch(url, {
       method: "POST",
-      headers: { "Content-Type": values.file.type },
+      headers: { "Content-Type": values.file?.type || "" },
       body: values.file,
     });
     const { storageId } = await result.json();

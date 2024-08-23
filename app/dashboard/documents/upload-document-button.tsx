@@ -10,11 +10,20 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import UploadDocumentForm from "./upload-document-form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Upload } from "lucide-react";
 
 export default function UploadDocumentButton() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) {
+    return null;
+  }
 
   return (
     <Dialog onOpenChange={setIsOpen} open={isOpen}>
