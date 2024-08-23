@@ -103,7 +103,7 @@ export function HoursResume() {
           width={200}
           height={200}
           alt="work illustration"
-          className="absolute -right-[2%] bottom-0 object-contain rounded-2xl mobile:hidden"
+          className="w-auto h-auto absolute -right-[2%] bottom-0 object-contain rounded-2xl laptop:w-[225px] laptop:h-[225px] mobile:hidden"
         />
       </WobbleCard>
     </div>

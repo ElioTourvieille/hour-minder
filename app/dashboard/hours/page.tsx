@@ -4,7 +4,6 @@ import { api } from "@/convex/_generated/api";
 import { useMutation, useQuery } from "convex/react";
 import { toast } from "sonner";
 import AddHoursForm from "./add-hours-forms";
-import { useClerk } from "@clerk/nextjs";
 import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import { FormData } from "@/lib/types";
@@ -17,13 +16,13 @@ import {
 import { HoursResume } from "@/components/hoursResume";
 import { ConvexError } from "convex/values";
 import SideNavMobile from "@/components/mobile-nav";
+import { useCurrentUser } from "@/hooks/useCurrentUser";
 
 export default function DashboardHoursPage() {
-  const { user } = useClerk();
-  const clerkId = user?.id;
+  const { currentUser, isLoading } = useCurrentUser();
 
   const addHours = useMutation(api.hours.addHours);
-  const getUser = useQuery(api.users.getUserByClerkId, { clerkId });
+  const getUser = useQuery(api.users.getUserByClerkId, { clerkId: currentUser?._id });
 
   const [isClient, setIsClient] = useState(false);
 
@@ -37,7 +36,7 @@ export default function DashboardHoursPage() {
 
       const durationInMinutes = endTime.diff(startTime, "minute");
 
-      // Assurer que startTime et endTime sont des chaînes de caractères non nulles
+      // Ensure that startTime and endTime are non-null strings
       const formattedData = {
         startTime: startTime.format("HH:mm"),
         endTime: endTime.format("HH:mm"),
@@ -49,7 +48,7 @@ export default function DashboardHoursPage() {
         comments,
       };
 
-      // Appel à l'API ou à la fonction de mutation
+      // Call to the API or the mutation function
       await addHours(formattedData);
       toast.success("Heures ajoutées avec succès !");
     } catch (error) {
@@ -84,9 +83,19 @@ export default function DashboardHoursPage() {
         </div>
 
         {/* Résumé des Heures */}
-        <div className="flex-1">
-          <HoursResume />
-        </div>
+        {!isLoading ? (
+          <div className="flex-1">
+            <HoursResume />
+          </div>
+        ) : (
+          <div className="flex-1">
+            <Card className="h-[60vh] max-w-lg py-10 px-6 flex flex-col justify-between">
+              <Skeleton className="h-[15vh] rounded" />
+              <Skeleton className="h-[15vh] rounded" />
+              <Skeleton className="h-[15vh] rounded" />
+            </Card>
+          </div>
+        )}
       </div>
       <BackgroundShapeBottom />
     </section>

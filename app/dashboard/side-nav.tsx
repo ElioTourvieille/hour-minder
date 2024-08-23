@@ -19,7 +19,7 @@ export default function SideNav() {
                 "text-blue-700": pathname.endsWith("/search"),
               }
             )}
-            href="/dashboard/hours"
+            href="/dashboard/search"
           >
             <Search />
             Recherche

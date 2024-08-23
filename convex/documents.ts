@@ -2,7 +2,6 @@ import { Id } from "./_generated/dataModel";
 import { internalQuery, mutation, MutationCtx, query, QueryCtx } from "./_generated/server";
 import { v } from "convex/values";
 
-
 export async function hasAccessToDocument(
     ctx: MutationCtx | QueryCtx,
     documentId: Id<"documents">,
@@ -39,7 +38,7 @@ export const generateUploadUrl = mutation(async (ctx) => {
 });
 
 export const getDocument = query({
-    args: { userId: v.string() },
+    args: { userId: v.optional(v.id("users")) },
     handler: async (ctx, args) => {
         const user = (await ctx.auth.getUserIdentity())?.tokenIdentifier;
 
@@ -58,7 +57,7 @@ export const createDocument = mutation({
     args: {
         title: v.string(),
         description: v.optional(v.string()),
-        userId: v.string(),
+        userId: v.optional(v.id("users")),
         fileId: v.id("_storage"),
     },
     handler: async (ctx, args) => {

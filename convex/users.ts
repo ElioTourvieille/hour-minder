@@ -15,8 +15,6 @@ export const getUserByClerkId = query({
     }
 });
 
-
-
 export const createUser = internalMutation({
     args: {
         clerkId: v.string(),
