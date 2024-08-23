@@ -16,6 +16,10 @@ export default function Home() {
   const { currentUser } = useCurrentUser();
   const [isClient, setIsClient] = useState(false);
 
+  const documents = useQuery(api.documents.getDocuments, {
+    userId: currentUser?._id,
+  });
+
   useEffect(() => {
     setIsClient(true);
   }, []);
@@ -23,11 +27,6 @@ export default function Home() {
   if (!isClient) {
     return null;
   }
-
-
-  const documents = useQuery(api.documents.getDocuments, {
-    userId: currentUser?._id,
-  });
 
   return (
     <main className="w-full space-y-8 mobile:text-center">
