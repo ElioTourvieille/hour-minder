@@ -20,15 +20,17 @@ import { useCurrentUser } from "@/hooks/useCurrentUser";
 
 export default function DashboardHoursPage() {
   const { currentUser, isLoading } = useCurrentUser();
-
+ 
   const addHours = useMutation(api.hours.addHours);
-  const getUser = useQuery(api.users.getUserByClerkId, { clerkId: currentUser?._id });
+  const getUser = useQuery(api.users.getUserByClerkId, { clerkId: currentUser?.clerkId });
 
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
   },[]);
+
+  console.log(getUser);
 
   const handleAddHours = async (formData: FormData) => {
     try {

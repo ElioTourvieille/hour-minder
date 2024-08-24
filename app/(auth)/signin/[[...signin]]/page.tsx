@@ -1,14 +1,8 @@
 "use client";
 
 import { SignIn } from "@clerk/nextjs";
-import { useConvexAuth } from "convex/react";
 
 const SignInPage = () => {
-  const { isLoading } = useConvexAuth();
-
-  if (isLoading) {
-    return <div className="w-full flex justify-center">Chargement</div>;
-  }
 
   return (
     <main className="flex flex-col items-center justify-center w-full">
