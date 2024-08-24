@@ -12,6 +12,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useCurrentUser } from "@/hooks/useCurrentUser";
 import { BackgroundShapeBottom, BackgroundShapeTop } from "@/components/backgroundShape";
 import NotesIllustration from "@/public/assets/img/Notebook-amico.svg";
+import SideNavMobile from "@/components/mobile-nav";
 
 export default function NotesPage() {
   const { currentUser } = useCurrentUser();
@@ -23,7 +24,8 @@ export default function NotesPage() {
   return (
     <main className="w-full space-y-8">
       <BackgroundShapeTop />
-      <div className="flex justify-between items-center mobile:flex-col mobile:gap-4">
+      <div className="flex justify-between items-center tablet:flex-col tablet:gap-8">
+      <SideNavMobile />
         <h1 className="text-4xl font-bold">Notes</h1>
         {notes && notes.length > 0 && <CreateNoteButton />}
       </div>
@@ -67,7 +69,7 @@ export default function NotesPage() {
               <li
                 key={note._id}
                 className={cn(
-                  "p-4 border-2 border-slate-300 text-center rounded-md text-base hover:text-blue-300 dark:hover:text-cyan-100",
+                  "p-4 min-h-32 border-2 border-slate-300 text-center rounded-md text-base hover:text-blue-300 dark:hover:text-cyan-100",
                   {
                     "text-cyan-300": note._id === noteId,
                   }
@@ -75,7 +77,7 @@ export default function NotesPage() {
               >
                 <Link href={`/dashboard/notes/${note._id}`}>
                   <h3 className="text-xl font-bold">{note.title}</h3>
-                  <p className="text-md italic">{note.text.substring(0, 24) + "..."}</p>
+                  <p className="text-md italic">{note.text.substring(0, 60) + "..."}</p>
                 </Link>
               </li>
             ))}

@@ -5,6 +5,7 @@ import { SearchForm } from "../../../components/search-form";
 import { api } from "@/convex/_generated/api";
 import Link from "next/link";
 import { FileIcon, NotebookPen } from "lucide-react";
+import SideNavMobile from "@/components/mobile-nav";
 
 function SearchResult({
   url,
@@ -47,7 +48,8 @@ export default function SearchPage() {
 
   return (
     <main className="w-full space-y-8 pb-44">
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center tablet:flex-col tablet:gap-8">
+      <SideNavMobile />
         <h1 className="text-4xl font-bold">Rechercher</h1>
       </div>
 

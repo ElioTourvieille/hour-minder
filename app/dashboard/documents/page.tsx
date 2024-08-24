@@ -10,6 +10,7 @@ import { useCurrentUser } from "@/hooks/useCurrentUser";
 import { BackgroundShapeBottom, BackgroundShapeTop } from "@/components/backgroundShape";
 import ImgDocument from "@/public/assets/img/document.webp";
 import UploadDocumentButton from "@/components/upload-document-button";
+import SideNavMobile from "@/components/mobile-nav";
 
 export default function Home() {
   const { currentUser } = useCurrentUser();
@@ -20,7 +21,8 @@ export default function Home() {
   return (
     <main className="w-full space-y-8 mobile:text-center">
       <BackgroundShapeTop />
-      <div className="flex justify-between items-center mobile:flex-col mobile:gap-6">
+      <div className="flex justify-between items-center tablet:flex-col tablet:gap-8">
+      <SideNavMobile />
         <h1 className="text-4xl font-bold">Mes documents</h1>
         {documents && documents.length > 0 && <UploadDocumentButton />}
       </div>

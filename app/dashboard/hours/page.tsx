@@ -64,7 +64,7 @@ export default function DashboardHoursPage() {
   };
 
   return (
-    <section className="w-full max-w-7xl mx-auto px-4 py-4">
+    <section className="w-full max-w-7xl mx-auto px-4 py-4 mobile:px-0">
       <BackgroundShapeTop />
       <div className="w-full flex laptop:flex-col laptop:gap-8">
         <SideNavMobile />
