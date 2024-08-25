@@ -31,7 +31,6 @@ export default defineSchema({
         month: v.number(),
         year: v.number(),
         userId: v.optional(v.id("users")),
-        comments: v.optional(v.string()),
         duration: v.optional(v.number()),
     }).index("by_userId", ["userId"])
 });

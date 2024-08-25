@@ -72,7 +72,6 @@ export const addHours = mutation({
     month: v.number(),
     year: v.number(),
     userId: v.optional(v.id("users")),
-    comments: v.optional(v.string()),
     duration: v.optional(v.float64()),
   },
   handler: async (ctx, args) => {
@@ -93,7 +92,6 @@ export const addHours = mutation({
       month: args.month + 1,
       year: args.year,
       userId: args.userId,
-      comments: args.comments,
       duration: args.duration,
     });
   },

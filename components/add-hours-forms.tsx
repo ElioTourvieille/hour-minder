@@ -32,6 +32,7 @@ function AddHoursForm({ onSubmit }: { onSubmit: (formData: FormData) => Promise<
       date: new Date(),
       startTime: dayjs(localStorage.getItem("startTime") || dayjs()),
       endTime: undefined,
+      pauseDuration: 0,
     },
   });
 
@@ -56,7 +57,8 @@ function AddHoursForm({ onSubmit }: { onSubmit: (formData: FormData) => Promise<
 
   const onFormSubmit = (data: FormData) => {
     const startTime = data.startTime ;
-    const endTime = data.endTime ; 
+    const endTime = data.endTime ;
+    const pauseDuration = data.pauseDuration;
 
     if (!startTime) {
       setError('startTime', { type: 'manual', message: 'Veuillez remplir le champ heure de début' });
@@ -80,6 +82,7 @@ function AddHoursForm({ onSubmit }: { onSubmit: (formData: FormData) => Promise<
       endTime, 
       month,
       year,
+      pauseDuration,
     };
     onSubmit(formData);
     handleChecked(false);
@@ -147,11 +150,12 @@ function AddHoursForm({ onSubmit }: { onSubmit: (formData: FormData) => Promise<
       </LocalizationProvider>
 
       <div className="flex flex-col">
-        <label className="mb-2 text-gray-700 dark:text-white">Commentaires :</label>
-        <textarea
-          {...register('comments')}
-          className="border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none dark:bg-gray-700"
-          rows={4}
+        <label className="mb-2 text-gray-700 dark:text-white">Durée de pause (en minutes) :</label>
+        <input
+          {...register('pauseDuration')}
+          type="number"
+          min="0"
+          className="border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700"
         />
       </div>
 

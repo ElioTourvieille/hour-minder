@@ -4,7 +4,7 @@ interface FormData {
     date: Date;
     startTime: dayjs.Dayjs ;
     endTime: dayjs.Dayjs;
-    comments?: string;
+    pauseDuration: number;
 }
 
 export type { FormData };

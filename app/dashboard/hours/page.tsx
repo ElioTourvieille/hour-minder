@@ -30,13 +30,12 @@ export default function DashboardHoursPage() {
     setIsClient(true);
   },[]);
 
-  console.log(getUser);
-
   const handleAddHours = async (formData: FormData) => {
     try {
-      const { date, startTime, endTime, comments } = formData;
+      const { date, startTime, endTime, pauseDuration } = formData;
 
-      const durationInMinutes = endTime.diff(startTime, "minute");
+      const totaldurationInMinutes = endTime.diff(startTime, "minute");
+      const durationInMinutes = totaldurationInMinutes - (pauseDuration || 0);
 
       // Ensure that startTime and endTime are non-null strings
       const formattedData = {
@@ -47,7 +46,6 @@ export default function DashboardHoursPage() {
         year: date.getFullYear(),
         duration: durationInMinutes,
         userId: getUser?._id,
-        comments,
       };
 
       // Call to the API or the mutation function
