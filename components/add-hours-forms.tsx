@@ -99,8 +99,12 @@ function AddHoursForm({ onSubmit }: { onSubmit: (formData: FormData) => Promise<
         <DatePicker
           selected={getValues('date')}
           onChange={(date: Date | null) => date && setValue('date', date)}
-          dateFormat="yyyy-MM-dd"
-          className="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700"
+          dateFormat="dd-MM-yyyy"
+          locale="fr-FR"
+          calendarStartDay={1}
+          withPortal
+          portalId="root-portal"
+          className="w-full bg-white border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700"
           />
         )}
       />
