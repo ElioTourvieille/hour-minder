@@ -78,6 +78,7 @@ export default function NotesPage() {
                 <Link href={`/dashboard/notes/${note._id}`}>
                   <h3 className="text-xl font-bold">{note.title}</h3>
                   <p className="text-md italic">{note.text.substring(0, 60) + "..."}</p>
+                  <p className="text-sm text-start text-slate-400 mt-4">Le {new Date(note._creationTime).toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' })}</p>
                 </Link>
               </li>
             ))}

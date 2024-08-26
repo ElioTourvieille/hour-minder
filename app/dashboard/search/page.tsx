@@ -14,7 +14,6 @@ function SearchResult({
 }: {
   type: string;
   url: string;
-
   text: string;
 }) {
   return (
